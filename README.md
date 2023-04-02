@@ -35,6 +35,16 @@ docker-compose exec backend python manage.py createsuperuser
 - Соберите статику
 ``` docker-compose exec backend python manage.py collectstatic --no-input ```
 
+# Шаблон наполнения .env
+
+```
+DB_NAME=postgres
+POSTGRES_USER=postgres
+POSTGRES_PASSWORD=postgres
+DB_HOST=db
+DB_PORT=5432
+```
+
 # Используемые технологии
 
 - Python
