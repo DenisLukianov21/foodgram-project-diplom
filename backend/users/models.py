@@ -2,6 +2,8 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.db.models import UniqueConstraint
 
+from .validators import vaidate_subscribing
+
 
 class User(AbstractUser):
     USERNAME_FIELD = 'email'
@@ -20,6 +22,7 @@ class User(AbstractUser):
 class Subscribe(models.Model):
     user = models.ForeignKey(User, related_name='subscriber',
                              verbose_name="Подписчик",
+                             validators=[vaidate_subscribing],
                              on_delete=models.CASCADE)
     author = models.ForeignKey(User, related_name='subscribing',
                                verbose_name="Автор",

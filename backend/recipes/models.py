@@ -72,10 +72,7 @@ class IngredientInRecipe(models.Model):
         Ingredient,
         on_delete=models.CASCADE,
         verbose_name='Ингредиент',)
-    amount = models.PositiveSmallIntegerField(
-        'Количество',
-        validators=(
-            MinValueValidator(1, message='Минимальное количество 1!'),))
+    amount = models.IntegerField('Количество')
 
     class Meta:
         verbose_name = 'Ингредиент в рецепте'
@@ -100,7 +97,7 @@ class Favourite(models.Model):
     class Meta:
         verbose_name = 'Избранное'
         verbose_name_plural = 'Избранное'
-        constraints = (UniqueConstraint(fields=['user', 'recipe'],
+        constraints = (UniqueConstraint(fields=('user', 'recipe'),
                        name='unique_favourite'),)
 
     def __str__(self):
@@ -122,7 +119,7 @@ class ShoppingCart(models.Model):
     class Meta:
         verbose_name = 'Корзина покупок'
         verbose_name_plural = 'Корзина покупок'
-        constraints = (UniqueConstraint(fields=['user', 'recipe'],
+        constraints = (UniqueConstraint(fields=('user', 'recipe'),
                        name='unique_shopping_cart'),)
 
     def __str__(self):
