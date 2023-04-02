@@ -9,7 +9,7 @@ services:
     restart: always
 
   backend:
-    image: docker pull denislukianov2001/foodbackend
+    image: denislukianov2001/foodbackend:latest
     restart: always
     volumes:
       - static_value:/app/static/
