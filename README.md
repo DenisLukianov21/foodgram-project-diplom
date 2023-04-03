@@ -13,17 +13,18 @@ http://127.0.0.1/api/docs/
 ```
 git@github.com:DenisLukianov21/foodgram-project-react.git
 ```
-- Установите и активируйте виртуальное окружение
+- Установите docker и docker-compose
 ```
-python3 -m venv venv
-source /venv/bin/activate
+sudo apt install curl                               
+curl -fsSL https://get.docker.com -o get-docker.sh     
+sh get-docker.sh                                       
+sudo apt-get install docker-compose-plugin              
 ```
-
-- Установите зависимости из файла requirements.txt
-
-``` pip install -r requirements.txt ```
-
-- Перейдите в папку с файлом docker-compose.yaml и запустите контейнеры
+-  Находясь в папке infra создайте .env файл
+```
+touch .env
+```
+- В этой же папке, с файлом docker-compose.yaml, запустите контейнеры
 
 ``` docker-compose up -d --build ```
 - Выполните миграции и создайте суперпользователя
