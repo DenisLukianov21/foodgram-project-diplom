@@ -9,7 +9,7 @@ services:
     restart: always
 
   backend:
-    image: denislukianov2001/foodbackend:latest
+    image: denislukianov2001/foodbackend:v2
     restart: always
     volumes:
       - static_value:/app/static/

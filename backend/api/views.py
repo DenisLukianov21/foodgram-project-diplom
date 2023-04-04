@@ -53,12 +53,16 @@ class RecipeViewSet(ModelViewSet):
     def favorite(self, request, pk):
         if request.method == 'POST':
             return self.add_to(Favourite, request.user, pk)
+        if request.method == 'DELETE':
+            return self.delete_from(Favourite, request.user, pk)
 
     @action(detail=True, methods=['post', 'delete'],
             permission_classes=[IsAuthenticated])
     def shopping_cart(self, request, pk):
         if request.method == 'POST':
             return self.add_to(ShoppingCart, request.user, pk)
+        if request.method == 'DELETE':
+            return self.delete_from(ShoppingCart, request.user, pk)
 
     def add_to(self, model, user, pk):
         if model.objects.filter(user=user, recipe__id=pk).exists():
@@ -79,6 +83,9 @@ class RecipeViewSet(ModelViewSet):
 
     @action(detail=False, permission_classes=[IsAuthenticated])
     def download_shopping_cart(self, request):
+        user = request.user
+        if not user.shopping_cart.exists():
+            return Response(status=HTTP_400_BAD_REQUEST)
         ingredients = IngredientInRecipe.objects.filter(
             recipe__shopping_cart__user=request.user
         ).values(
